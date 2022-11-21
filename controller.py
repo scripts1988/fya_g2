@@ -4,7 +4,7 @@
 class EmployeeData:
 
     # initialize
-    def __init__(self, name, date_of_birth, position):
+    def __init__(self, name = "", date_of_birth = "", position = ""):
         self.ID = 0
         self.name = name
         self.date_of_birth = date_of_birth
@@ -12,7 +12,7 @@ class EmployeeData:
     
     # string format to print
     def __str__(self):
-        return f'{self.ID: <4}: {self.name: <15}  {self.date_of_birth: ^12} {self.position: >15}'
+        return f'{self.ID: <2}: {self.name: <15}  {self.date_of_birth: ^12} {self.position: >15}'
 
 # data structure to manage all employees
 class Employees:
@@ -35,17 +35,18 @@ class Employees:
                 return employee
         return None
 
-    # add by EmployeeData model
+    # add by name, DOB, Position
     # return true if successfully added.
     # Return false: the employee with the same name and DOB exists or the list reaches the limit allowed (max_size)
-    def add(self,new_employee):
+    def add(self,name, dob = "", position = ""):
         # The employee is already in the list
-        employee = self.search(new_employee.name)
+        employee = self.search(name)
 
         # if the new employee is existed and the position is the same OR over the limit
-        if (employee != None) and (employee.date_of_birth == new_employee.date_of_birth) and (len(self.employee_list) > self.max_size):
+        if (employee != None) and (employee.date_of_birth == dob) or (len(self.employee_list) > self.max_size):
             return False
-        
+
+        new_employee = EmployeeData(name,dob,position)
         # Id is assigned based on adding order (1st employee: 1, 20th employee: 20)
         new_employee.ID = len(self.employee_list) + 1
         self.employee_list.append(new_employee)
@@ -76,35 +77,38 @@ class Employees:
         return True
 
 
-# testing space
+# # testing space
 
-# worker = EmployeeData("Sarah","20/20/96","Manager")
-# EmployeeList = Employees()
-# ret = EmployeeList.add(worker)
-# worker = EmployeeData("Hannah","51/02/96","CEO")
-# ret = EmployeeList.add(worker)
-# worker = EmployeeData("Hannah","51/02/98","Marketing")
-# ret = EmployeeList.add(worker)
-# print(ret)
-# EmployeeList.print()
-# ret = EmployeeList.modify("Sarah","20/02/96")
-# print(ret)
-# EmployeeList.print()
+EmployeeList = Employees()
+ret = EmployeeList.add("Sarah","20/20/96","COO")
+ret = EmployeeList.add("Hannah","51/02/96","CEO")
+ret = EmployeeList.add("Hannah","51/02/98","Marketing")
+print(ret)
+EmployeeList.print()
+ret = EmployeeList.modify("Sarah","20/02/96")
+print(ret)
+EmployeeList.print()
 
-# ret = EmployeeList.delete("Rosie")
-# print(ret)
-# EmployeeList.print()
+ret = EmployeeList.delete("Rosie")
+print(ret)
+EmployeeList.print()
 
-# worker = EmployeeData("Rosie","20/05/02","Sales")
-# ret = EmployeeList.add(worker)
-# print(ret)
-# EmployeeList.print()
+ret = EmployeeList.add("Rosie","20/05/02","Sales")
+print(ret)
+EmployeeList.print()
 
-# ret = EmployeeList.delete("Rosie")
-# print(ret)
-# EmployeeList.print()
+ret = EmployeeList.delete("Rosie")
+print(ret)
+EmployeeList.print()
 
-# worker = EmployeeData("Dennis","20/05/00","HR")
-# ret = EmployeeList.add(worker)
-# print(ret)
-# EmployeeList.print()
+ret = EmployeeList.add("Dennis","20/05/00","HR")
+print(ret)
+EmployeeList.print()
+
+ret = EmployeeList.add("Rosie")
+print(ret)
+EmployeeList.print()
+
+EmployeeList.modify("Rosie", "20/05/02", "Sales")
+print(ret)
+EmployeeList.print()
