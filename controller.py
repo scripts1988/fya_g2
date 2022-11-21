@@ -5,13 +5,14 @@ class EmployeeData:
 
     # initialize
     def __init__(self, name, date_of_birth, position):
+        self.ID = 0
         self.name = name
         self.date_of_birth = date_of_birth
         self.position = position
     
     # string format to print
     def __str__(self):
-        return f'{self.name: <15}  {self.date_of_birth: ^12} {self.position: >15}'
+        return f'{self.ID: <4}: {self.name: <15}  {self.date_of_birth: ^12} {self.position: >15}'
 
 # data structure to manage all employees
 class Employees:
@@ -45,6 +46,8 @@ class Employees:
         if (employee != None) and (employee.date_of_birth == new_employee.date_of_birth) and (len(self.employee_list) > self.max_size):
             return False
         
+        # Id is assigned based on adding order (1st employee: 1, 20th employee: 20)
+        new_employee.ID = len(self.employee_list) + 1
         self.employee_list.append(new_employee)
         return True
 
@@ -100,5 +103,10 @@ class Employees:
 # EmployeeList.print()
 
 # ret = EmployeeList.delete("Rosie")
+# print(ret)
+# EmployeeList.print()
+
+# worker = EmployeeData("Dennis","20/05/00","HR")
+# ret = EmployeeList.add(worker)
 # print(ret)
 # EmployeeList.print()
