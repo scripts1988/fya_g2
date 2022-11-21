@@ -65,8 +65,6 @@ class Employees:
     # change DOB or position
     # cannot change name!
     # modify by searching for name
-    # README: Can be changed to modify name if required.
-    # Otherwise, to change the position to someone else, need to delete the old employee and add the new one
     def modify(self,name,date_of_birth = "",position = ""):
         employee = self.search(name)
         if employee == None:
