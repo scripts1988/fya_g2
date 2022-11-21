@@ -82,7 +82,7 @@ class Employees:
 # ret = EmployeeList.add(worker)
 # worker = EmployeeData("Hannah","51/02/96","CEO")
 # ret = EmployeeList.add(worker)
-# worker = EmployeeData("Hannah","51/02/98","Cashier")
+# worker = EmployeeData("Hannah","51/02/98","Marketing")
 # ret = EmployeeList.add(worker)
 # print(ret)
 # EmployeeList.print()
