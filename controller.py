@@ -36,7 +36,7 @@ class EmployeeData:
     
     # string format to print
     def __str__(self):
-        return f'{self.ID: <2}: {self.name: <15}  {self.date_of_birth: ^12} {self.position: >15}'
+        return f'{self.ID: <2}: {self.name: <15}  {self.date_of_birth: ^12} {self.position: ^15}'
 
 # data structure to manage all employees
 class Employees:
