@@ -9,6 +9,30 @@ class EmployeeData:
         self.name = name
         self.date_of_birth = date_of_birth
         self.position = position
+
+    def getID(self):
+        return self.ID
+    
+    def getName(self):
+        return self.name
+    
+    def getDOB(self):
+        return self.date_of_birth
+    
+    def getPosition(self):
+        return self.position
+    
+    def setID(self, id):
+        self.ID = id
+
+    def setName(self,name):
+        self.name = name
+    
+    def setDOB(self,dob):
+        self.date_of_birth = dob
+    
+    def setPosition(self,role):
+        self.position = role
     
     # string format to print
     def __str__(self):
@@ -27,6 +51,11 @@ class Employees:
         for worker in self.employee_list:
             print(worker)
 
+    # Id is assigned based on adding order (1st employee: 1, 20th employee: 20)
+    def generateID(self):
+        tempID = len(self.employee_list) + 1
+        return tempID
+
     # search by name
     # return: employee's module if found, otherwise: None (NULL)
     def search(self,name):
@@ -37,18 +66,18 @@ class Employees:
 
     # add by name, DOB, Position
     # return true if successfully added.
-    # Return false: the employee with the same name and DOB exists or the list reaches the limit allowed (max_size)
+    # Return false: the employee with the same name exists or the list reaches the limit allowed (max_size)
     def add(self,name, dob = "", position = ""):
         # The employee is already in the list
         employee = self.search(name)
 
-        # if the new employee is existed and the position is the same OR over the limit
-        if (employee != None) and (employee.date_of_birth == dob) or (len(self.employee_list) > self.max_size):
+        # if the new employee is existed OR the list is at the limit
+        if (employee != None) or (len(self.employee_list) > self.max_size):
             return False
 
         new_employee = EmployeeData(name,dob,position)
-        # Id is assigned based on adding order (1st employee: 1, 20th employee: 20)
-        new_employee.ID = len(self.employee_list) + 1
+        
+        new_employee.setID(self.generateID())
         self.employee_list.append(new_employee)
         return True
 
@@ -71,9 +100,9 @@ class Employees:
         if employee == None:
             return False
         if date_of_birth != "":
-            employee.date_of_birth = date_of_birth
+            employee.setDOB(date_of_birth)
         if position != "":
-            employee.position = position
+            employee.setPosition(position)
         return True
 
 
