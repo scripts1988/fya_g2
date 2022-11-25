@@ -37,7 +37,7 @@ class EmployeeData:
     # string format to print
     def __str__(self):
         return f'{self.ID: <2}: {self.name: <15}  {self.date_of_birth: ^12} {self.position: ^15}'
-
+ 
 # data structure to manage all employees
 class Employees:
 
@@ -53,8 +53,10 @@ class Employees:
 
     # Id is assigned based on adding order (1st employee: 1, 20th employee: 20)
     def generateID(self):
-        tempID = len(self.employee_list) + 1
-        return tempID
+        if (len(self.employee_list) == 0):
+            return 1
+        return (self.employee_list[-1].getID() + 1)
+        
 
     # search by name
     # return: employee's module if found, otherwise: None (NULL)
@@ -111,7 +113,7 @@ class Employees:
 # EmployeeList = Employees()
 # ret = EmployeeList.add("Sarah","20/20/96","COO")
 # ret = EmployeeList.add("Hannah","51/02/96","CEO")
-# ret = EmployeeList.add("Hannah","51/02/98","Marketing")
+# ret = EmployeeList.add("Emma","51/02/98","Marketing")
 # print(ret)
 # EmployeeList.print()
 # ret = EmployeeList.modify("Sarah","20/02/96")
@@ -126,7 +128,7 @@ class Employees:
 # print(ret)
 # EmployeeList.print()
 
-# ret = EmployeeList.delete("Rosie")
+# ret = EmployeeList.delete("Emma")
 # print(ret)
 # EmployeeList.print()
 
