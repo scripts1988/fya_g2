@@ -1,53 +1,20 @@
 
-
-# enclose an employee's information
-class EmployeeData:
-
-    # initialize
-    def __init__(self, name = "", date_of_birth = "", position = ""):
-        self.ID = 0
-        self.name = name
-        self.date_of_birth = date_of_birth
-        self.position = position
-
-    def getID(self):
-        return self.ID
-    
-    def getName(self):
-        return self.name
-    
-    def getDOB(self):
-        return self.date_of_birth
-    
-    def getPosition(self):
-        return self.position
-    
-    def setID(self, id):
-        self.ID = id
-
-    def setName(self,name):
-        self.name = name
-    
-    def setDOB(self,dob):
-        self.date_of_birth = dob
-    
-    def setPosition(self,role):
-        self.position = role
-    
-    # string format to print
-    def __str__(self):
-        return f'{self.ID: <2}: {self.name: <15}  {self.date_of_birth: ^12} {self.position: ^15}'
- 
+from employee import Employee
 # data structure to manage all employees
-class Employees:
-
+class EmployeesDatabase:
     # initialize
     def __init__(self):
         self.employee_list = []
         self.max_size = 20
 
+    def getDatabase(self):
+        return self.employee_list
+    
     # print function
     def print(self):
+        if (len(self.employee_list) == 0):
+            print("No employee data is available")
+            return
         for worker in self.employee_list:
             print(worker)
 
@@ -69,7 +36,7 @@ class Employees:
     # add by name, DOB, Position
     # return true if successfully added.
     # Return false: the employee with the same name exists or the list reaches the limit allowed (max_size)
-    def add(self,name, dob = "", position = ""):
+    def add(self,name, dob = "", position = "", id = 0):
         # The employee is already in the list
         employee = self.search(name)
 
@@ -77,9 +44,12 @@ class Employees:
         if (employee != None) or (len(self.employee_list) > self.max_size):
             return False
 
-        new_employee = EmployeeData(name,dob,position)
+        new_employee = Employee(name,dob,position)
+        if (id == 0):
+            new_employee.setID(self.generateID())
+        else:
+            new_employee.setID(id)
         
-        new_employee.setID(self.generateID())
         self.employee_list.append(new_employee)
         return True
 
@@ -106,41 +76,3 @@ class Employees:
         if position != "":
             employee.setPosition(position)
         return True
-
-
-
-# # testing space
-
-# EmployeeList = Employees()
-# ret = EmployeeList.add("Sarah","20/20/96","COO")
-# ret = EmployeeList.add("Hannah","51/02/96","CEO")
-# ret = EmployeeList.add("Emma","51/02/98","Marketing")
-# print(ret)
-# EmployeeList.print()
-# ret = EmployeeList.modify("Sarah","20/02/96")
-# print(ret)
-# EmployeeList.print()
-
-# ret = EmployeeList.delete("Rosie")
-# print(ret)
-# EmployeeList.print()
-
-# ret = EmployeeList.add("Rosie","20/05/02","Sales")
-# print(ret)
-# EmployeeList.print()
-
-# ret = EmployeeList.delete("Emma")
-# print(ret)
-# EmployeeList.print()
-
-# ret = EmployeeList.add("Dennis","20/05/00","HR")
-# print(ret)
-# EmployeeList.print()
-
-# ret = EmployeeList.add("Rosie")
-# print(ret)
-# EmployeeList.print()
-
-# EmployeeList.modify("Rosie", "20/05/02", "Sales")
-# print(ret)
-# EmployeeList.print()
