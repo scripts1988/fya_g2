@@ -1,4 +1,6 @@
 
+from model import *
+import pandas
 
 # enclose an employee's information
 class EmployeeData:
@@ -51,6 +53,29 @@ class Employees:
         for worker in self.employee_list:
             print(worker)
 
+    def clearCSV(self):
+        # file = open("data.csv", "w")
+        # file.truncate()
+        # file.close()
+        with open('data.csv', 'r+') as f:
+            for i in range(1):
+                f.readline() # read each line
+            f.truncate(f.tell()) # terminate the file here
+
+
+    def update(self):
+        #Clear CSV.
+        self.clearCSV()
+        for worker in self.employee_list:
+            add_id = worker.getID()
+            add_name = worker.getName()
+            add_DOB = worker.getDOB()
+            add_position = worker.getPosition()
+            dataset = [[add_id,add_name,add_DOB,add_position]]
+            dataframe = pandas.DataFrame(dataset)
+            dataframe.to_csv("data.csv", index=False, mode='a', header=False)
+        
+
     # Id is assigned based on adding order (1st employee: 1, 20th employee: 20)
     def generateID(self):
         if (len(self.employee_list) == 0):
@@ -81,6 +106,7 @@ class Employees:
         
         new_employee.setID(self.generateID())
         self.employee_list.append(new_employee)
+        self.update()
         return True
 
     # delete employee by name
@@ -92,6 +118,7 @@ class Employees:
             return False
 
         self.employee_list.remove(employee)
+        self.update()
         return True
     
     # change DOB or position
@@ -105,21 +132,27 @@ class Employees:
             employee.setDOB(date_of_birth)
         if position != "":
             employee.setPosition(position)
+        self.update()
         return True
+
+    
 
 
 
 # # testing space
 
-# EmployeeList = Employees()
-# ret = EmployeeList.add("Sarah","20/20/96","COO")
-# ret = EmployeeList.add("Hannah","51/02/96","CEO")
-# ret = EmployeeList.add("Emma","51/02/98","Marketing")
-# print(ret)
-# EmployeeList.print()
-# ret = EmployeeList.modify("Sarah","20/02/96")
-# print(ret)
-# EmployeeList.print()
+EmployeeList = Employees()
+ret = EmployeeList.add("Sarah","20/20/96","COO")
+
+ret = EmployeeList.add("Hannah","51/02/96","CEO")
+ret = EmployeeList.add("Emma","51/02/98","Marketing")
+print(ret)
+EmployeeList.print()
+ret = EmployeeList.modify("Sarah","20/02/96")
+print(ret)
+EmployeeList.print()
+
+# print(pandas.read_csv('data.csv'))
 
 # ret = EmployeeList.delete("Rosie")
 # print(ret)
