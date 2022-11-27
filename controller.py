@@ -141,16 +141,16 @@ class Employees:
 
 # # testing space
 
-EmployeeList = Employees()
-ret = EmployeeList.add("Sarah","20/20/96","COO")
+# EmployeeList = Employees()
+# ret = EmployeeList.add("Sarah","20/20/96","COO")
 
-ret = EmployeeList.add("Hannah","51/02/96","CEO")
-ret = EmployeeList.add("Emma","51/02/98","Marketing")
-print(ret)
-EmployeeList.print()
-ret = EmployeeList.modify("Sarah","20/02/96")
-print(ret)
-EmployeeList.print()
+# ret = EmployeeList.add("Hannah","51/02/96","CEO")
+# ret = EmployeeList.add("Emma","51/02/98","Marketing")
+# print(ret)
+# EmployeeList.print()
+# ret = EmployeeList.modify("Sarah","20/02/96")
+# print(ret)
+# EmployeeList.print()
 
 # print(pandas.read_csv('data.csv'))
 
