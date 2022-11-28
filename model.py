@@ -9,7 +9,7 @@ file_path = 'data.csv'
 
 # read data from csv file
 def read_file(file_directory = file_path):
-    employee_list = EmployeesDatabase()
+    employee_database = EmployeesDatabase()
     try:
         with open(file_directory) as file:
             for line in file.readlines():
@@ -19,20 +19,17 @@ def read_file(file_directory = file_path):
                 # 1 : Name
                 # 2 : DOB
                 # 3 : Position
-                employee_list.add(data[1],data[2],data[3],int(data[0]))
+                employee_database.add(data[1],data[2],data[3],int(data[0]))
     except:
         print('Error finding file... EXIT')
-    return employee_list
+    return employee_database
 
 # write to csv file from the employee list
 def write_file(employee_database, file_directory = file_path):
-    try:
-        with open(file_directory,"w") as file:
-            for employee in employee_database.employee_list:
-                # csv file format: ID,name,DOB,position
-                data_set = [str(employee.getID()),employee.getName(),employee.getDOB(),employee.getPosition()]
-                info = ','.join(data_set)
-                file.write(info)
-                file.write('\n')
-    except:
-        print('Error finding file... EXIT')
+    file = open(file_directory,"w")
+    for employee in employee_database.employee_list:
+        # csv file format: ID,name,DOB,position
+        data_set = [str(employee.getID()),employee.getName(),employee.getDOB(),employee.getPosition()]
+        info = ','.join(data_set)
+        file.write(info)
+        file.write('\n')
